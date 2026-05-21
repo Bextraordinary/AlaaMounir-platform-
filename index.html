@@ -506,27 +506,26 @@
 
   <script>
     let works = JSON.parse(localStorage.getItem('alaa_works')) || [
-  {
-    type: "photos",
-    title: "📸 الصور",
-    desc: "لقطات من التخاريج والمناسبات",
-    media: ["aa.png", "nn.png", "w.jpg"]
-  },
-  {
-    type: "videos",
-    title: "🎥 فيديوهات التخريج",
-    desc: "مقاطع من الحفلات",
-    media: ["takhrij.mp4", "takhrij.mp4"]   
-  },
-  {
-    type: "audios",
-    title: "🎵 التسجيلات الصوتية", 
-    desc: "المقاطع الصوتية للحفلات",
-    media: ["sawt.mp3", "sawt.mp3"]  
-  }
-];
+      {
+        type: "photos",
+        title: "📸 الصور",
+        desc: "لقطات من التخاريج والمناسبات",
+        media: ["aa.png", "nn.png", "w.jpg"]
+      },
+      {
+        type: "videos",
+        title: "🎥 فيديوهات التخريج",
+        desc: "مقاطع من الحفلات",
+        media: ["takhrij.mp4", "takhrij.mp4"]   
+      },
+      {
+        type: "audios",
+        title: "🎵 التسجيلات الصوتية", 
+        desc: "المقاطع الصوتية للحفلات",
+        media: ["sawt.mp3", "sawt.mp3"]  
+      }
+    ];
   
-
     let news = JSON.parse(localStorage.getItem('alaa_news')) || [
       { title: "تغطية تخريج دفعة 2026", date: "16 مايو 2026", content: "قمنا بتغطية حفل تخريج كلية الهندسة جامعة الخرطوم. كان يوم مميز وفرح لا يوصف." }
     ];
@@ -777,13 +776,15 @@
     renderWorks();
     renderNews();
     renderResults();
+
+    // تسجيل Service Worker للـ PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('Service Worker registered'))
+          .catch(err => console.log('Service Worker failed:', err));
+      });
+    }
   </script>
-  if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(reg => console.log('Service Worker registered'))
-      .catch(err => console.log('Service Worker failed:', err));
-  });
-}
 </body>
 </html>
