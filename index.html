@@ -13,11 +13,12 @@
   <title>الاء منير - منصتك الإعلامية</title>
   <link rel="icon" type="image/png" href="ss.png">
   <link rel="apple-touch-icon" href="ss.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   
   <style>
     * { 
       margin: 0; padding: 0; box-sizing: border-box; 
-      font-family: 'Segoe UI', Tahoma, sans-serif; 
+      font-family: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, sans-serif; 
       scroll-behavior: smooth;
     }
     
@@ -196,7 +197,8 @@
     
     .media-grid img, .media-grid video {
       width: 100%;
-      height: 180px;
+      height: auto;
+      max-height: 250px;
       object-fit: cover;
       border-radius: 10px;
     }
@@ -391,7 +393,14 @@
     
     @media (max-width: 768px) {
       header h1 { font-size: 2.2rem; }
-      nav ul { gap: 15px; font-size: 0.9rem; }
+      nav ul { 
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px; 
+        font-size: 0.9rem; 
+      }
+      nav ul::-webkit-scrollbar { display: none; }
       .modal-content { padding: 30px 20px; }
       .profile-img { width: 120px; height: 120px; }
       .back-to-top { right: 20px; bottom: 20px; }
@@ -777,10 +786,9 @@
     renderNews();
     renderResults();
 
-    // تسجيل Service Worker للـ PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
+        navigator.serviceWorker.register('./service-worker.js')
           .then(reg => console.log('Service Worker registered'))
           .catch(err => console.log('Service Worker failed:', err));
       });
