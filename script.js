@@ -3,7 +3,19 @@ let works = JSON.parse(localStorage.getItem('alaa_works')) || [
     type: "photos",
     title: "📸 الصور",
     desc: "لقطات من التخاريج والمناسبات",
-    media: ["aa.png", "nn.png", "w.jpg", "aa.png"]
+    media: ["aa.png", "nn.png", "w.jpg"]
+  },
+  {
+    type: "videos",
+    title: "🎥 فيديوهات التخريج",
+    desc: "مقاطع من الحفلات",
+    media: ["takhrij.mp4", "takhrij.mp4"]
+  },
+  {
+    type: "audios",
+    title: "🎵 التسجيلات الصوتية", 
+    desc: "المقاطع الصوتية للحفلات",
+    media: [".mp3", "audio2.mp3"]  
   }
 ];
 
