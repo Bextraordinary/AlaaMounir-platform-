@@ -3,79 +3,766 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصة آلاء منير</title>
+  <meta name="description" content="الاء منير - منصة إعلامية لتغطية الحفلات والمناسبات في أم درمان">
+  <meta name="theme-color" content="#8e24aa">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="الاء منير">
+  
+  <title>الاء منير - منصتك الإعلامية</title>
+  <link rel="icon" type="image/png" href="ss.png">
+  <link rel="apple-touch-icon" href="ss.png">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { 
+      margin: 0; padding: 0; box-sizing: border-box; 
+      font-family: 'Segoe UI', Tahoma, sans-serif; 
+      scroll-behavior: smooth;
     }
-    body {
-      font-family: 'Tahoma', Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #333;
-      min-height: 100vh;
-      padding: 20px;
+    
+    body { background: #f5f7fa; color: #222; }
+    
+    nav {
+      background: linear-gradient(135deg, #6a0d2b, #8e1b3d);
+      padding: 15px 20px;
+      box-shadow: 0 2px 15px rgba(106,13,43,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    
+    nav a:hover { color: #ffb3c7; }
+    
+    .about-btn {
       background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      color: #6a0d2b;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 0.9rem;
     }
-    h1 {
-      text-align: center;
-      color: #667eea;
-      margin-bottom: 20px;
-      font-size: 28px;
+    
+    .about-btn:hover {
+      background: #ffb3c7;
+      transform: scale(1.05);
     }
+    
+    header { 
+      background: linear-gradient(135deg, #8e24aa, #d81b60); 
+      color: white; 
+      padding: 50px 20px; 
+      text-align: center; 
+    }
+    
     .profile-img {
-      display: block;
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      margin: 20px auto;
-      border: 5px solid #667eea;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-top: 30px;
-    }
-    .gallery img {
+    
+    header h1 { font-size: 3.2rem; margin-bottom: 10px; }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 200px;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s;
+    }
+    
+    .modal.active { display: flex; }
+    
+    .modal-content {
+      background: white;
+      max-width: 600px;
+      width: 90%;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      position: relative;
+      animation: slideUp 0.3s;
+    }
+    
+    .modal-content h2 {
+      color: #8e24aa;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    .modal-content p {
+      line-height: 1.9;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #d81b60;
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    
+    .section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    
+    .section h2 {
+      text-align: center;
+      color: #8e24aa;
+      margin-bottom: 35px;
+      font-size: 2rem;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-top: 4px solid #d81b60;
+      transition: 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+    }
+    
+    .card h3 {
+      color: #d81b60;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .media-grid img, .media-grid video {
+      width: 100%;
+      height: 180px;
       object-fit: cover;
       border-radius: 10px;
     }
-    p {
+    
+    .media-grid audio {
+      width: 100%;
+    }
+    
+    .audio-note {
+      font-size: 0.85rem;
+      color: #d81b60;
+      margin-top: 5px;
       text-align: center;
-      line-height: 1.8;
+    }
+    
+    .contact-form {
+      background: white;
+      padding: 35px;
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: 0.3s;
+    }
+    
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #d81b60;
+    }
+    
+    .contact-form button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #d81b60, #8e24aa);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 10px;
+    }
+    
+    .contact-form button:hover { transform: scale(1.02); }
+    
+    .social-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       margin-top: 20px;
-      font-size: 18px;
+    }
+    
+    .social-btn {
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    
+    .social-btn:hover { transform: scale(1.05); }
+    .facebook { background: #1877f2; }
+    .telegram { background: #0088cc; }
+    .youtube { background: #ff0000; }
+    
+    .success-msg {
+      display: none;
+      background: #4caf50;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 15px;
+    }
+    
+    .news-card, .result-card, .faq-item { 
+      background: white; 
+      margin-bottom: 22px; 
+      padding: 25px; 
+      border-radius: 16px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+      border-right: 5px solid #d81b60; 
+    }
+    
+    .result-card { border-right-color: #4caf50; }
+    
+    .news-card .date, .result-card .date { 
+      color: #777; 
+      font-size: 0.9rem; 
+      margin-bottom: 12px; 
+    }
+    
+    .result-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .result-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .result-list li:last-child { border-bottom: none; }
+    
+    .faq-item h3 {
+      color: #8e24aa;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-answer {
+      display: none;
+      line-height: 1.8;
+      color: #444;
+      padding-top: 10px;
+    }
+    
+    .faq-item.active .faq-answer { display: block; }
+    .faq-icon { transition: 0.3s; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+    
+    footer { 
+      text-align: center; 
+      padding: 35px; 
+      background: #1a1a1a; 
+      color: #aaa; 
+      margin-top: 70px; 
+    }
+    
+    .admin-btn { 
+      display: none;
+      position: fixed; 
+      bottom: 30px; 
+      left: 30px; 
+      background: linear-gradient(135deg, #d81b60, #8e24aa); 
+      color: white; 
+      border: none; 
+      padding: 14px 20px; 
+      border-radius: 50px; 
+      font-size: 0.95rem; 
+      cursor: pointer; 
+      box-shadow: 0 5px 18px rgba(216,27,96,0.4); 
+      font-weight: bold; 
+      z-index: 99;
+    }
+    
+    .admin-btn.show { display: block; }
+    .lock-icon { cursor: pointer; opacity: 0.3; font-size: 1.2rem; }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #d81b60;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 99;
+      transition: 0.3s;
+    }
+    
+    .back-to-top.show { display: block; }
+    .back-to-top:hover { background: #b0154d; transform: scale(1.1); }
+    
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+      nav ul { gap: 15px; font-size: 0.9rem; }
+      .modal-content { padding: 30px 20px; }
+      .profile-img { width: 120px; height: 120px; }
+      .back-to-top { right: 20px; bottom: 20px; }
+      .media-grid { grid-template-columns: 1fr; }
+      .social-buttons { grid-template-columns: 1fr; }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>أهلاً بيك في منصة آلاء منير</h1>
-    
-    <!-- الصورة الرئيسية -->
-    <img src="ss.png" alt="آلاء منير" class="profile-img">
-    
-    <p>مرحباً! ده الموقع الرسمي للمنصة</p>
-    
-    <!-- معرض الصور -->
-    <div class="gallery">
-      <img src="nn.png" alt="صورة 1">
-      <img src="w.jpg" alt="صورة 2">
+  <nav>
+    <ul>
+      <li><a href="#home">🏠 الرئيسية</a></li>
+      <li><a href="#works">🎨 أعمالي</a></li>
+      <li><a href="#news">📰 الأخبار</a></li>
+      <li><a href="#results">🎓 النتائج</a></li>
+      <li><a href="#faq">❓ أسئلة</a></li>
+      <li><a href="#contact">📞 تواصل</a></li>
+    </ul>
+    <button class="about-btn" onclick="openModal()">من نحن</button>
+  </nav>
+
+  <header id="home">
+    <img src="ss.png" alt="الاء منير" class="profile-img" loading="lazy">
+    <h1>الاء منير</h1>
+    <p>منصة إعلامية | صوت الحق</p>
+  </header>
+
+  <div class="modal" id="aboutModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <h2>من أنا؟</h2>
+      <p>
+        أنا <strong>الاء منير</strong>، ابنةُ الكلمةِ الرصينة، وحارسةُ المعنى النبيل.<br><br>
+        إذا اعتلى صوتي المنبرَ، سالت الحروفُ عذوبةً، وانتظمت المعاني انتظامَ اللؤلؤِ في العقد.  
+        صوتي آيةٌ في الجمال، ونبرتي سيفٌ من نورٍ يشقُّ سكونَ القلوب.<br><br>
+        أتشرّفُ بإحياءِ <strong>حفلاتِ التخريج</strong> في مدارسِ <strong>صالحةَ - أم درمان</strong>،  
+        وبكل المناسبات: أعراس، فعاليات مدارس وجامعات.
+      </p>
     </div>
   </div>
 
-  <!-- شيلت السكربت بتاع service worker مؤقتاً عشان ما يبوظ الصفحة -->
+  <div class="section" id="works">
+    <h2>🎨 أعمالي</h2>
+    <div class="grid" id="works-container"></div>
+  </div>
+
+  <div class="section" id="news">
+    <h2>📰 آخر الأخبار</h2>
+    <div id="news-container"></div>
+  </div>
+
+  <div class="section" id="results">
+    <h2>🎓 نتائج الطلاب</h2>
+    <div id="results-container"></div>
+  </div>
+
+  <div class="section" id="faq">
+    <h2>❓ الأسئلة الشائعة</h2>
+    <div class="faq-item">
+      <h3 onclick="toggleFAQ(this)">بتغطي أي مناطق؟ <span class="faq-icon">▼</span></h3>
+      <div class="faq-answer">
+        التغطية الأساسية في أم درمان - صالحة، وبمشي لأي مكان في الخرطوم حسب الاتفاق.
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <h3 onclick="toggleFAQ(this)">الحجز كيف والأسعار كم؟ <span class="faq-icon">▼</span></h3>
+      <div class="faq-answer">
+        الحجز بيكون عبر الواتساب قبل المناسبة بأسبوع على الأقل. الأسعار بتختلف حسب نوع المناسبة والمدة، تواصلي معاي ونتفق.
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <h3 onclick="toggleFAQ(this)">بتجيبي معدات التصوير معاك؟ <span class="faq-icon">▼</span></h3>
+      <div class="faq-answer">
+       لا أملك معدات حالياً، لكن بحاول أوفر كاميرا احترافية ومايك، وبجيب كل المعدات اللازمة للتغطية للمستقبل.
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="contact">
+    <h2>📞 تواصلي معاي</h2>
+    <form class="contact-form" onsubmit="sendMessage(event)">
+      <input type="text" id="name" placeholder="اسمك" required>
+      <input type="tel" id="phone" placeholder="رقم التلفون" required pattern="[0-9]{10,}">
+      <input type="text" id="subject" placeholder="موضوع الرسالة" required>
+      <textarea id="message" rows="5" placeholder="اكتبي رسالتك هنا..." required></textarea>
+      <button type="submit">إرسال عبر الواتساب</button>
+      
+      <div class="social-buttons">
+        <a href="https://facebook.com" target="_blank" class="social-btn facebook">📘 فيسبوك</a>
+        <a href="https://t.me" target="_blank" class="social-btn telegram">✈️ تلجرام</a>
+        <a href="https://youtube.com" target="_blank" class="social-btn youtube">▶️ يوتيوب</a>
+      </div>
+      
+      <div class="success-msg" id="successMsg">بيفتح ليك الواتساب هسي...</div>
+    </form>
+  </div>
+
+  <button class="admin-btn" id="addPhotoBtn" onclick="addPhoto()" style="bottom: 210px;">+ أضيفي ألبوم صور</button>
+  <button class="admin-btn" id="addVideoBtn" onclick="addVideo()" style="bottom: 150px;">+ أضيفي فيديو</button>
+  <button class="admin-btn" id="addAudioBtn" onclick="addAudio()" style="bottom: 90px;">+ أضيفي صوت</button>
+  <button class="admin-btn" id="addNewsBtn" onclick="addNews()">+ أضيفي خبر</button>
+  <button class="admin-btn" id="addResultBtn" onclick="addResult()">+ أضيفي نتيجة</button>
+  <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+  <footer>
+    <p>© 2026 الاء منير. جميع الحقوق محفوظة <span class="lock-icon" onclick="adminLogin()">🔒</span></p>
+    <p style="margin-top: 10px;">واتساب: 0916155806 | ايميل: alaa.munir@gmail.com</p>
+  </footer>
+
+  <script>
+    let works = JSON.parse(localStorage.getItem('alaa_works')) || [
+      {
+        type: "photos",
+        title: "📸 الصور",
+        desc: "لقطات من التخاريج والمناسبات",
+        media: ["aa.png", "nn.png", "w.jpg", "aa.png"]
+      }
+    ];
+
+    let news = JSON.parse(localStorage.getItem('alaa_news')) || [
+      { title: "تغطية تخريج دفعة 2026", date: "16 مايو 2026", content: "قمنا بتغطية حفل تخريج كلية الهندسة جامعة الخرطوم. كان يوم مميز وفرح لا يوصف." }
+    ];
+
+    let results = JSON.parse(localStorage.getItem('alaa_results')) || [
+      { title: "نتائج المرحلة المتوسطة 2026", date: "17 مايو 2026", students: ["أحمد محمد - 98%", "فاطمة علي - 95%", "سارة حسن - 92%"] },
+      { title: "نتائج رياض الأطفال 2026", date: "17 مايو 2026", students: ["محمد عمر - ممتاز", "نور أحمد - ممتاز", "خديجة علي - جيد جداً"] }
+    ];
+
+    const ADMIN_PASSWORD = "Alaa2026";
+    let tapCount = 0;
+
+    function saveWorks() {
+      localStorage.setItem('alaa_works', JSON.stringify(works));
+    }
+
+    function saveNews() {
+      localStorage.setItem('alaa_news', JSON.stringify(news));
+    }
+
+    function saveResults() {
+      localStorage.setItem('alaa_results', JSON.stringify(results));
+    }
+
+    function renderWorks() {
+      const container = document.getElementById('works-container');
+      container.innerHTML = '';
+      works.forEach(item => {
+        let mediaHTML = '';
+        
+        if (item.type === "photos") {
+          mediaHTML = `<div class="media-grid">${item.media.map(src => `<img src="${src}" loading="lazy" alt="صورة">`).join('')}</div>`;
+        }
+        
+        if (item.type === "videos") {
+          mediaHTML = `<div class="media-grid">${item.media.map(src => `<video controls preload="none"><source src="${src}" type="video/mp4"></video>`).join('')}</div>`;
+        }
+        
+        if (item.type === "audios") {
+          mediaHTML = `<div class="media-grid">${item.media.map(src => `
+            <div>
+              <audio controls preload="none" class="limit-audio">
+                <source src="${src}" type="audio/mpeg">
+              </audio>
+              <p class="audio-note">⏱️ أقصى مدة دقيقة</p>
+            </div>
+          `).join('')}</div>`;
+        }
+        
+        container.innerHTML += `
+          <div class="card">
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+            ${mediaHTML}
+          </div>
+        `;
+      });
+      
+      document.querySelectorAll('.limit-audio').forEach(audio => {
+        audio.addEventListener('timeupdate', function() {
+          if (this.currentTime >= 60) {
+            this.pause();
+            this.currentTime = 0;
+          }
+        });
+      });
+    }
+
+    function renderNews() {
+      const container = document.getElementById('news-container');
+      container.innerHTML = '';
+      news.forEach(item => {
+        container.innerHTML += `
+          <div class="news-card">
+            <h2>${item.title}</h2>
+            <div class="date">${item.date}</div>
+            <p>${item.content}</p>
+          </div>
+        `;
+      });
+    }
+
+    function renderResults() {
+      const container = document.getElementById('results-container');
+      container.innerHTML = '';
+      results.forEach(item => {
+        let studentsList = item.students.map(s => `<li>${s}</li>`).join('');
+        container.innerHTML += `
+          <div class="result-card">
+            <h2>${item.title}</h2>
+            <div class="date">${item.date}</div>
+            <ul class="result-list">${studentsList}</ul>
+          </div>
+        `;
+      });
+    }
+
+    function addPhoto() {
+      const title = prompt("عنوان ألبوم الصور:");
+      if (!title) return;
+      const desc = prompt("وصف بسيط:");
+      if (!desc) return;
+      
+      const mediaText = prompt("اكتبي روابط الصور، كل صورة في سطر جديد:\nالحد الأقصى 4 صور");
+      if (!mediaText) return;
+      
+      const media = mediaText.split('\n').filter(s => s.trim() !== '').slice(0, 4);
+      works.unshift({ type: "photos", title, desc, media });
+      saveWorks();
+      renderWorks();
+    }
+
+    function addVideo() {
+      const title = prompt("عنوان ألبوم الفيديو:");
+      if (!title) return;
+      const desc = prompt("وصف بسيط:");
+      if (!desc) return;
+      
+      const mediaText = prompt("اكتبي روابط الفيديو، كل فيديو في سطر جديد:\nالحد الأقصى 4 فيديوهات");
+      if (!mediaText) return;
+      
+      const media = mediaText.split('\n').filter(s => s.trim() !== '').slice(0, 4);
+      works.unshift({ type: "videos", title, desc, media });
+      saveWorks();
+      renderWorks();
+    }
+
+    function addAudio() {
+      const title = prompt("عنوان ألبوم الصوت:");
+      if (!title) return;
+      const desc = prompt("وصف بسيط:");
+      if (!desc) return;
+      
+      const mediaText = prompt("اكتبي روابط الصوت، كل ملف في سطر جديد:\nالحد الأقصى 4 ملفات");
+      if (!mediaText) return;
+      
+      const media = mediaText.split('\n').filter(s => s.trim() !== '').slice(0, 4);
+      works.unshift({ type: "audios", title, desc, media });
+      saveWorks();
+      renderWorks();
+    }
+
+    function addNews() {
+      const title = prompt("اكتبي عنوان الخبر:");
+      if (!title) return;
+      const content = prompt("اكتبي محتوى الخبر:");
+      if (!content) return;
+      const today = new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+      news.unshift({ title, date: today, content });
+      saveNews();
+      renderNews();
+    }
+
+    function addResult() {
+      const title = prompt("اكتبي عنوان النتيجة:");
+      if (!title) return;
+      
+      const studentsText = prompt("اكتبي أسماء الطلاب والنسبة، كل طالب في سطر جديد:");
+      if (!studentsText) return;
+      
+      const students = studentsText.split('\n').filter(s => s.trim() !== '');
+      const today = new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+      
+      results.unshift({ title, date: today, students });
+      saveResults();
+      renderResults();
+    }
+
+    function sendMessage(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      
+      if (!phone.match(/^[0-9]{10,}$/)) {
+        alert("رقم التلفون غلط! لازم يكون 10 أرقام على الأقل");
+        return;
+      }
+      
+      const text = `السلام عليكم أستاذة الاء 👋\n\n*الاسم:* ${name}\n*رقم التلفون:* ${phone}\n*الموضوع:* ${subject}\n\n*الرسالة:*\n${message}`;
+      
+      const whatsappNumber = "249916155806";
+      
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+      
+      document.getElementById('successMsg').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('successMsg').style.display = 'none';
+        document.querySelector('.contact-form').reset();
+      }, 2000);
+    }
+
+    function openModal() {
+      document.getElementById('aboutModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('aboutModal').classList.remove('active');
+    }
+
+    function toggleFAQ(element) {
+      const item = element.parentElement;
+      item.classList.toggle('active');
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('aboutModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+
+    function adminLogin() {
+      tapCount++;
+      if (tapCount === 3) {
+        const pass = prompt("دخلي كلمة السر:");
+        if (pass === ADMIN_PASSWORD) {
+          document.getElementById('addPhotoBtn').classList.add('show');
+          document.getElementById('addVideoBtn').classList.add('show');
+          document.getElementById('addAudioBtn').classList.add('show');
+          document.getElementById('addNewsBtn').classList.add('show');
+          document.getElementById('addResultBtn').classList.add('show');
+          alert("تم تفعيل وضع المدير ✓");
+        } else {
+          alert("كلمة السر غلط!");
+        }
+        tapCount = 0;
+      }
+      setTimeout(() => { tapCount = 0; }, 2000);
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', function() {
+      const backToTop = document.getElementById('backToTop');
+      if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+
+    renderWorks();
+    renderNews();
+    renderResults();
+  </script>
 </body>
 </html>
