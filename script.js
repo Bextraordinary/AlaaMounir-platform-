@@ -15,7 +15,7 @@ let works = JSON.parse(localStorage.getItem('alaa_works')) || [
     type: "audios",
     title: "🎵 التسجيلات الصوتية", 
     desc: "المقاطع الصوتية للحفلات",
-    media: [".mp3", "audio2.mp3"]  
+    media: ["sawt.mp3", "sawt.mp3"]  
   }
 ];
 
